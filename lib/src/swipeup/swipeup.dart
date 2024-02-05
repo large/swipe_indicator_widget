@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
 import '../build_swipe_indicator.dart';
 
-class Circle extends StatefulWidget {
+class SwipeUp extends StatefulWidget {
   final Size size;
   final Color color;
   final Color borderColor;
+  final Color dotColor;
+  final Color borderDotColor;
   final int repeats;
   final Function? onAnimationComplete;
 
-  const Circle({
+  const SwipeUp({
     super.key,
     required this.size,
     required this.color,
+    required this.dotColor,
     required this.borderColor,
+    required this.borderDotColor,
     this.onAnimationComplete,
     this.repeats = 2,
   });
 
   @override
-  State<Circle> createState() => _CircleState();
+  State<SwipeUp> createState() => _SwipeUpState();
 }
 
-class _CircleState extends State<Circle> with SingleTickerProviderStateMixin {
+class _SwipeUpState extends State<SwipeUp> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   int _repeats = 0;
 
@@ -82,7 +86,7 @@ class _CircleState extends State<Circle> with SingleTickerProviderStateMixin {
               decoration: BoxDecoration(
                 border: Border.all(color: widget.borderColor),
                 borderRadius: BorderRadius.circular(widget.size.width / 2),
-                //color: widget.color,
+                color: widget.color,
               ),
               width: widget.size.width,
               height: widget.size.width +
@@ -104,9 +108,9 @@ class _CircleState extends State<Circle> with SingleTickerProviderStateMixin {
                         .value),
                 child: Container(
                   decoration: BoxDecoration(
-                    border: Border.all(color: widget.borderColor),
+                    border: Border.all(color: widget.borderDotColor),
                     borderRadius: BorderRadius.circular(5),
-                    color: widget.color,
+                    color: widget.dotColor,
                   ),
                   height: 10,
                   width: 10,

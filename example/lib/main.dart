@@ -104,15 +104,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Text("Trigger anim")),
             Visibility(
               visible: _visible,
-              child: SwipeIndicatorWidget.circle(
+              child: SwipeIndicatorWidget.swipeUp(
                   onAnimationComplete: () {
                     setState(() {
                       _visible = false;
                     });
                   },
-                  color: Colors.black,
+                  dotColor: Colors.green,
+                  borderDotColor: Colors.lightGreen,
+                  color: Colors.grey,
                   size: const Size(40.0, 250.0),
-                  borderColor: Colors.grey,
+                  borderColor: Colors.black,
                   repeats: 1
               ),
             ),
