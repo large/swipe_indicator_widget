@@ -33,25 +33,20 @@ class _SwipeUpState extends State<SwipeUp> with SingleTickerProviderStateMixin {
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(
-        milliseconds: 1500,
-      ),
+      duration: const Duration(milliseconds: 1500),
     );
 
     //Callback on animations
     _animationController.addStatusListener((status) {
-      if(status == AnimationStatus.completed)
-        {
-          _repeats++;
-          if(_repeats < widget.repeats) {
-            _animationController.reset();
-            _animationController.forward();
-          }
-          else
-          {
-            if(widget.onAnimationComplete!=null) widget.onAnimationComplete!();
-          }
+      if (status == AnimationStatus.completed) {
+        _repeats++;
+        if (_repeats < widget.repeats) {
+          _animationController.reset();
+          _animationController.forward();
+        } else {
+          if (widget.onAnimationComplete != null) widget.onAnimationComplete!();
         }
+      }
     });
 
     //Start animation
@@ -75,12 +70,19 @@ class _SwipeUpState extends State<SwipeUp> with SingleTickerProviderStateMixin {
         builder: (BuildContext context, Widget? child) {
           return Padding(
             padding: EdgeInsets.only(
-                bottom: Tween<double>(
-                        begin: 0.0, end: widget.size.height - widget.size.width)
-                    .animate(CurvedAnimation(
-                        parent: _animationController,
-                        curve: Curves.easeInOutQuart))
-                    .value),
+              bottom:
+                  Tween<double>(
+                        begin: 0.0,
+                        end: widget.size.height - widget.size.width,
+                      )
+                      .animate(
+                        CurvedAnimation(
+                          parent: _animationController,
+                          curve: Curves.easeInOutQuart,
+                        ),
+                      )
+                      .value,
+            ),
             child: Container(
               decoration: BoxDecoration(
                 border: Border.all(color: widget.borderColor),
@@ -88,23 +90,40 @@ class _SwipeUpState extends State<SwipeUp> with SingleTickerProviderStateMixin {
                 color: widget.color,
               ),
               width: widget.size.width,
-              height: widget.size.width +
+              height:
+                  widget.size.width +
                   Tween<double>(begin: 0.0, end: widget.size.width)
-                      .animate(CurvedAnimation(
+                      .animate(
+                        CurvedAnimation(
                           parent: _animationController,
-                          curve: Curves.easeInOutQuart))
+                          curve: Curves.easeInOutQuart,
+                        ),
+                      )
                       .value -
                   Tween<double>(begin: 0.0, end: widget.size.width)
-                      .animate(CurvedAnimation(
-                          parent: _animationController, curve: Curves.linear))
+                      .animate(
+                        CurvedAnimation(
+                          parent: _animationController,
+                          curve: Curves.linear,
+                        ),
+                      )
                       .value,
               alignment: Alignment.topCenter,
               child: Padding(
                 padding: EdgeInsets.only(
-                    top: Tween<double>(begin: widget.size.width / 3, end: widget.size.width/4)
-                        .animate(CurvedAnimation(
-                            parent: _animationController, curve: Curves.easeIn))
-                        .value),
+                  top:
+                      Tween<double>(
+                            begin: widget.size.width / 3,
+                            end: widget.size.width / 4,
+                          )
+                          .animate(
+                            CurvedAnimation(
+                              parent: _animationController,
+                              curve: Curves.easeIn,
+                            ),
+                          )
+                          .value,
+                ),
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: widget.borderDotColor),

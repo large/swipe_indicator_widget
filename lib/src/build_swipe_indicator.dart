@@ -5,6 +5,7 @@ import 'swipeup/swipeup.dart';
 class SwipeIndicatorWidget {
   SwipeIndicatorWidget._();
 
+  //SwipeUp static creator
   static Widget swipeUp({
     required Color color,
     required Color dotColor,
@@ -27,6 +28,7 @@ class SwipeIndicatorWidget {
     );
   }
 
+  //SwipeZoom static creator
   static Widget swipeZoom({
     required Color color,
     required Color dotColor,

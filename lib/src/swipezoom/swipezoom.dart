@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class SwipeZoom extends StatefulWidget {
@@ -47,10 +46,11 @@ class _SwipeZoomState extends State<SwipeZoom>
       if (status == AnimationStatus.completed) {
         _repeats++;
         if (_repeats < widget.repeats) {
-
           //Sleep time between each repeat
-          if(widget.waitTimeBetweenRepeats>0) {
-            await Future.delayed(Duration(milliseconds: widget.waitTimeBetweenRepeats));
+          if (widget.waitTimeBetweenRepeats > 0) {
+            await Future.delayed(
+              Duration(milliseconds: widget.waitTimeBetweenRepeats),
+            );
           }
           _animationController.reset();
           _animationController.forward();
@@ -80,7 +80,14 @@ class _SwipeZoomState extends State<SwipeZoom>
         animation: _animationController,
         builder: (BuildContext context, Widget? child) {
           return AnimatedOpacity(
-            opacity: Tween<double>(begin: 1.0, end: 0.0).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInExpo)).value,
+            opacity: Tween<double>(begin: 1.0, end: 0.0)
+                .animate(
+                  CurvedAnimation(
+                    parent: _animationController,
+                    curve: Curves.easeInExpo,
+                  ),
+                )
+                .value,
             duration: const Duration(),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -123,7 +130,10 @@ class _SwipeZoomState extends State<SwipeZoom>
   Widget blob(bool left) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: widget.borderColor, width: widget.borderWidth),
+        border: Border.all(
+          color: widget.borderColor,
+          width: widget.borderWidth,
+        ),
         borderRadius: BorderRadius.circular(widget.size.height / 2),
         color: widget.color,
       ),

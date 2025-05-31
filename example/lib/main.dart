@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Swipe indicator demo'),
     );
   }
 }
@@ -97,51 +97,53 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextButton(
-                onPressed: () {
-                  setState(() {
-                    _visibleZoom = true;
-                  });
-                },
-                child: const Text("Trigger zoom anim")),
+              onPressed: () {
+                setState(() {
+                  _visibleZoom = true;
+                });
+              },
+              child: const Text("Trigger zoom anim"),
+            ),
             Visibility(
               visible: _visibleZoom,
               child: SwipeIndicatorWidget.swipeZoom(
-                  onAnimationComplete: () {
-                    setState(() {
-                      _visibleZoom = false;
-                    });
-                  },
-                  dotColor: Colors.green,
-                  borderDotColor: Colors.greenAccent,
-                  color: Colors.grey,
-                  size: const Size(350.0, 40.0),
-                  borderColor: Colors.black,
-                  repeats: 2,
-                  borderWidth: 2.0,
-                 waitTimeBetweenRepeats: 1000,
+                onAnimationComplete: () {
+                  setState(() {
+                    _visibleZoom = false;
+                  });
+                },
+                dotColor: Colors.green,
+                borderDotColor: Colors.greenAccent,
+                color: Colors.grey,
+                size: const Size(350.0, 40.0),
+                borderColor: Colors.black,
+                repeats: 2,
+                borderWidth: 2.0,
+                waitTimeBetweenRepeats: 1000,
               ),
             ),
             TextButton(
-                onPressed: () {
-                  setState(() {
-                    _visible = true;
-                  });
-                },
-                child: const Text("Trigger up anim")),
+              onPressed: () {
+                setState(() {
+                  _visible = true;
+                });
+              },
+              child: const Text("Trigger up anim"),
+            ),
             Visibility(
               visible: _visible,
               child: SwipeIndicatorWidget.swipeUp(
-                  onAnimationComplete: () {
-                    setState(() {
-                      _visible = false;
-                    });
-                  },
-                  dotColor: Colors.green,
-                  borderDotColor: Colors.lightGreen,
-                  color: Colors.grey,
-                  size: const Size(40.0, 250.0),
-                  borderColor: Colors.black,
-                  repeats: 2
+                onAnimationComplete: () {
+                  setState(() {
+                    _visible = false;
+                  });
+                },
+                dotColor: Colors.green,
+                borderDotColor: Colors.lightGreen,
+                color: Colors.grey,
+                size: const Size(40.0, 250.0),
+                borderColor: Colors.black,
+                repeats: 2,
               ),
             ),
           ],
