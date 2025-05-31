@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../build_swipe_indicator.dart';
 
 class SwipeUp extends StatefulWidget {
   final Size size;

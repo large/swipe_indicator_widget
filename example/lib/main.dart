@@ -57,6 +57,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool _visible = false;
+  bool _visibleZoom = false;
 
   @override
   Widget build(BuildContext context) {
@@ -98,10 +99,35 @@ class _MyHomePageState extends State<MyHomePage> {
             TextButton(
                 onPressed: () {
                   setState(() {
+                    _visibleZoom = true;
+                  });
+                },
+                child: const Text("Trigger zoom anim")),
+            Visibility(
+              visible: _visibleZoom,
+              child: SwipeIndicatorWidget.swipeZoom(
+                  onAnimationComplete: () {
+                    setState(() {
+                      _visibleZoom = false;
+                    });
+                  },
+                  dotColor: Colors.green,
+                  borderDotColor: Colors.greenAccent,
+                  color: Colors.grey,
+                  size: const Size(350.0, 40.0),
+                  borderColor: Colors.black,
+                  repeats: 2,
+                  borderWidth: 2.0,
+                 waitTimeBetweenRepeats: 1000,
+              ),
+            ),
+            TextButton(
+                onPressed: () {
+                  setState(() {
                     _visible = true;
                   });
                 },
-                child: const Text("Trigger anim")),
+                child: const Text("Trigger up anim")),
             Visibility(
               visible: _visible,
               child: SwipeIndicatorWidget.swipeUp(
@@ -115,7 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Colors.grey,
                   size: const Size(40.0, 250.0),
                   borderColor: Colors.black,
-                  repeats: 1
+                  repeats: 2
               ),
             ),
           ],
