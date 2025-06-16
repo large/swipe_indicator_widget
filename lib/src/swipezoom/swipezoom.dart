@@ -32,6 +32,7 @@ class _SwipeZoomState extends State<SwipeZoom>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   int _repeats = 0;
+  bool isDisposed = false;
 
   @override
   void initState() {
@@ -61,8 +62,10 @@ class _SwipeZoomState extends State<SwipeZoom>
           );
         }
         //Check that the controller is not disposed / dismissed
-        _animationController.reset();
-        _animationController.forward();
+        if(!isDisposed) {
+          _animationController.reset();
+          _animationController.forward();
+        }
       } else {
         if (widget.onAnimationComplete != null) widget.onAnimationComplete!();
       }
@@ -71,6 +74,7 @@ class _SwipeZoomState extends State<SwipeZoom>
 
   @override
   void dispose() {
+    isDisposed = true;
     _animationController.removeStatusListener(animationListenerTrigger);
     _animationController.dispose();
     super.dispose();
