@@ -42,30 +42,36 @@ class _SwipeZoomState extends State<SwipeZoom>
     );
 
     //Callback on animations
-    _animationController.addStatusListener((status) async {
-      if (status == AnimationStatus.completed) {
-        _repeats++;
-        if (_repeats < widget.repeats) {
-          //Sleep time between each repeat
-          if (widget.waitTimeBetweenRepeats > 0) {
-            await Future.delayed(
-              Duration(milliseconds: widget.waitTimeBetweenRepeats),
-            );
-          }
-          _animationController.reset();
-          _animationController.forward();
-        } else {
-          if (widget.onAnimationComplete != null) widget.onAnimationComplete!();
-        }
-      }
-    });
+    _animationController.addStatusListener(animationListenerTrigger);
 
     //Start animation
     _animationController.forward();
   }
 
+  //Included in own function, so it can be safely removed when disposed
+  Future<void> animationListenerTrigger(AnimationStatus status)
+  async {
+    if (status == AnimationStatus.completed) {
+      _repeats++;
+      if (_repeats < widget.repeats) {
+        //Sleep time between each repeat
+        if (widget.waitTimeBetweenRepeats > 0) {
+          await Future.delayed(
+            Duration(milliseconds: widget.waitTimeBetweenRepeats),
+          );
+        }
+        //Check that the controller is not disposed / dismissed
+        _animationController.reset();
+        _animationController.forward();
+      } else {
+        if (widget.onAnimationComplete != null) widget.onAnimationComplete!();
+      }
+    }
+  }
+
   @override
   void dispose() {
+    _animationController.removeStatusListener(animationListenerTrigger);
     _animationController.dispose();
     super.dispose();
   }

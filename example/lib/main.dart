@@ -1,3 +1,4 @@
+import 'package:example/testpage.dart';
 import 'package:flutter/material.dart';
 import 'package:swipe_indicator_widget/swipe_indicator_widget.dart';
 
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      key: UniqueKey(),
       title: 'Swipe indicator demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -96,6 +98,16 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            TextButton(onPressed: () async {
+              await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      maintainState: true,
+                      builder: (context) =>
+                      const TestPage()));
+
+            }, child: Text("Test Page Open")),
+
             TextButton(
               onPressed: () {
                 setState(() {
