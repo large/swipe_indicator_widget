@@ -60,6 +60,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool _visible = false;
   bool _visibleZoom = false;
+  bool _visibleDoubleZoom = false;
 
   @override
   Widget build(BuildContext context) {
@@ -108,6 +109,33 @@ class _MyHomePageState extends State<MyHomePage> {
 
             }, child: Text("Test Page Open")),
 
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  _visibleDoubleZoom = true;
+                });
+              },
+              child: const Text("Trigger double zoom anim"),
+            ),
+            Visibility(
+              visible: _visibleDoubleZoom,
+              child: SwipeIndicatorWidget.swipeDoubleZoom(
+                onAnimationComplete: () {
+                  setState(() {
+                    _visibleDoubleZoom = false;
+                  });
+                },
+                dotColor: Colors.red,
+                borderDotColor: Colors.redAccent,
+                color: Colors.grey,
+                heightAndWidth: 40.0,
+                windowSize: const Size(350.0, 250.0),
+                borderColor: Colors.black,
+                repeats: 2,
+                borderWidth: 2.0,
+                waitTimeBetweenRepeats: 1000,
+              ),
+            ),
             TextButton(
               onPressed: () {
                 setState(() {
